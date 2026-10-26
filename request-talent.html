@@ -192,6 +192,12 @@
   </div>
 </section>
 
+<script>
+/* Card links arrive as ?candidate=GR-01 — note it in the form so we know who they asked about */
+(function(){var c=new URLSearchParams(location.search).get('candidate');if(!c||!/^[A-Z]{2}-\d{1,3}$/.test(c))return;
+var n=document.getElementById('r-notes');if(n&&!n.value)n.value="I'd like to talk about candidate "+c+".";})();
+</script>
+
 <section style="background:var(--white);padding:48px 0;border-top:1px solid var(--border);">
   <div class="container">
     <div class="stats-box" style="margin:0;">

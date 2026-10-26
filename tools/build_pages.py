@@ -327,6 +327,55 @@ def example(style=""):
     return EXAMPLE.replace("{style}", f' style="{style}"' if style else "")
 
 
+def profiles_section(kicker, h2, sub):
+    """Blinded candidate cards from tools/profiles.json (no names, employers, or schools).
+    Each card links to the request form with its code; tools/candidate_key.local.json
+    (never published) says who each code is."""
+    import html as _h
+    path = Path(__file__).resolve().parent / "profiles.json"
+    items = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    if not items:
+        return ""
+    e = lambda s: _h.escape(str(s), quote=True)
+    cards = []
+    for p in items:
+        words = re.sub(r"[^A-Za-z ]", " ", p["title"]).split()
+        initials = "".join(w[0] for w in words[:2]).upper()
+        badges = [f'<span class="mpc-badge gold">{e(c)}</span>' for c in p.get("creds", [])[:2]]
+        if p.get("years"):
+            badges.append(f'<span class="mpc-badge">{e(p["years"])}+ yrs</span>')
+        if p.get("work_mode"):
+            badges.append(f'<span class="mpc-badge green">{e(p["work_mode"])}</span>')
+        badges += [f'<span class="mpc-badge">{e(s)}</span>' for s in p.get("specialties", [])[:2]]
+        win = (f'<div class="mpc-card-win"><span class="mpc-win-label">Track record</span>'
+               f'<span class="mpc-win-text">{e(p["highlight"])}</span></div>') if p.get("highlight") else ""
+        cards.append(f'<a class="mpc-card" href="request-talent.html?candidate={e(p["code"])}">'
+                     f'<div class="mpc-card-head"><div class="mpc-avatar">{e(initials)}</div>'
+                     f'<div><div class="mpc-card-title">{e(p["title"])}</div>'
+                     f'<div class="mpc-card-loc">[[ico:pin]] {e(p.get("location") or "")}</div></div></div>'
+                     f'<div class="mpc-badges">{"".join(badges)}</div>{win}'
+                     f'<span class="mpc-card-cta">Ask about {e(p["code"])} →</span></a>')
+    dup = "".join(cards).replace('<a class="mpc-card"', '<a class="mpc-card" aria-hidden="true" tabindex="-1"')
+    return f'''
+<!-- ── Candidates we're representing (blinded) ── -->
+<section class="section" id="talent" style="padding-bottom:16px;">
+  <div class="container section-head">
+    <div>
+      <span class="section-kicker">{kicker}</span>
+      <h2 class="section-title">{h2}</h2>
+      <p class="section-sub">{sub}</p>
+    </div>
+    <a href="request-talent.html" class="btn btn-outline-dark" style="flex-shrink:0;">Tell Us What You Need →</a>
+  </div>
+  <div class="mpc-marquee" aria-label="Candidates we are representing">
+    <div class="mpc-track">{"".join(cards)}{dup}</div>
+  </div>
+</section>
+'''
+
+
+PROFILES = profiles_section('Recruiters Available Now', "Recruiters We're <em>Representing</em> Right Now", "Screened recruiters and talent pros who completed our candidate questionnaire. Names are hidden to protect confidentiality — ask about anyone and we'll make the introduction.")
+
 AUDIENCE_STEPS = '''<li><strong>We build your list</strong> — the exact people you want to hire.</li>
         <li><strong>Our AI recruiting assistant writes the letter with you</strong> — then reaches out and invites them to apply for your job.</li>
         <li><strong>Candidates apply and film a video introduction.</strong></li>
@@ -467,7 +516,7 @@ HOME = '''
 <script src="https://100xrecruiting.com/static/spotlight_ticker.js?v=2" data-target="hx-spotlights" data-theme="light"
         data-only="recruiter,recruiting,sourcer,sourcing,talent acquisition,human resources,hr manager,hr generalist,hr business partner,people operations"
         data-fallback="{{SITE}}/contact.html" defer></script>
-
+''' + PROFILES + '''
 <!-- ── Stats strip ───────────────────────────── -->
 <div class="hero-stats">
   <div class="container">
@@ -1080,6 +1129,12 @@ REQUEST = '''
     </div>
   </div>
 </section>
+
+<script>
+/* Card links arrive as ?candidate=GR-01 — note it in the form so we know who they asked about */
+(function(){var c=new URLSearchParams(location.search).get('candidate');if(!c||!/^[A-Z]{2}-\\d{1,3}$/.test(c))return;
+var n=document.getElementById('r-notes');if(n&&!n.value)n.value="I'd like to talk about candidate "+c+".";})();
+</script>
 
 <section style="background:var(--white);padding:48px 0;border-top:1px solid var(--border);">
   <div class="container">
