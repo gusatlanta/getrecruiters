@@ -11,7 +11,8 @@
    "Finance, IT & admin roles"
   ],
   "work_mode": "Remote or Hybrid (prefers hybrid)",
-  "highlight": "Healthcare recruiter: built a specialty medical group's hiring process from scratch; ~45 open reqs, time-to-fill under 30 days"
+  "highlight": "Healthcare recruiter: built a specialty medical group's hiring process from scratch; ~45 open reqs, time-to-fill under 30 days",
+  "years": 4
  },
  {
   "code": "GR-02",
@@ -215,5 +216,483 @@
   ],
   "work_mode": "Remote or Hybrid",
   "highlight": "Healthcare recruiter (behavioral health) who raised offer acceptance 10% with market research and pay benchmarking"
+ },
+ {
+  "code": "GR-15",
+  "title": "Talent Acquisition Specialist",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Corporate talent acquisition",
+   "Healthcare recruiting"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Talent acquisition specialist at a Fortune 500 company who wants to get back into healthcare recruiting"
+ },
+ {
+  "code": "GR-16",
+  "title": "Talent Acquisition",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Paycom"
+  ],
+  "specialties": [
+   "In-house recruiting",
+   "Construction hiring",
+   "Onboarding & new-hire processing"
+  ],
+  "work_mode": "Hybrid or Onsite",
+  "highlight": "In-house recruiter for a construction company who also runs onboarding and new-hire processing in Paycom"
+ },
+ {
+  "code": "GR-17",
+  "title": "Senior Recruiter",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Workday",
+   "SAP SuccessFactors"
+  ],
+  "specialties": [
+   "Full-cycle recruiting",
+   "Manufacturing",
+   "Construction",
+   "Logistics & supply chain"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Senior recruiter for manufacturing, construction and supply-chain employers; comfortable in Workday and SuccessFactors"
+ },
+ {
+  "code": "GR-18",
+  "title": "HR Generalist",
+  "location": "Atlanta, GA metro",
+  "creds": [
+   "SHRM-CP"
+  ],
+  "systems": [
+   "Workday",
+   "isolved"
+  ],
+  "specialties": [
+   "Recruiting in Workday & isolved",
+   "Accounting & admin hiring",
+   "Logistics & construction roles"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "SHRM-CP HR generalist who has recruited accounting, admin, logistics and construction roles in Workday and isolved"
+ },
+ {
+  "code": "GR-19",
+  "title": "HR Director",
+  "location": "Atlanta, GA metro",
+  "years": 15,
+  "creds": [
+   "SHRM-SCP"
+  ],
+  "systems": [
+   "NEOGOV",
+   "Paylocity",
+   "Acquire"
+  ],
+  "specialties": [
+   "Recruiting via NEOGOV, Paylocity & Acquire",
+   "Finance, IT & sales hiring",
+   "Healthcare & public-sector HR"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "HR director for 15+ years who has recruited finance, IT, healthcare and sales roles using NEOGOV and Paylocity"
+ },
+ {
+  "code": "GR-20",
+  "title": "Sr HR Data Analyst",
+  "location": "Tampa, FL metro",
+  "systems": [
+   "Avature",
+   "Bullhorn",
+   "iCIMS",
+   "Taleo",
+   "Workday"
+  ],
+  "specialties": [
+   "Recruiting systems & ATS data",
+   "HR analytics",
+   "Accounting & admin hiring"
+  ],
+  "work_mode": "Remote",
+  "highlight": "HR data analyst who has worked across seven ATS platforms, including Avature, Bullhorn, iCIMS, Taleo and Workday"
+ },
+ {
+  "code": "GR-21",
+  "title": "HR Generalist",
+  "location": "Atlanta, GA metro",
+  "creds": [
+   "SPHR",
+   "PHR"
+  ],
+  "systems": [
+   "iCIMS",
+   "ADP Workforce Now"
+  ],
+  "specialties": [
+   "Recruiting in iCIMS",
+   "Distribution, tech & retail hiring",
+   "Manufacturing & logistics roles"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "SPHR-certified HR generalist who has recruited in iCIMS across distribution, tech, retail and manufacturing"
+ },
+ {
+  "code": "GR-22",
+  "title": "Human Resources Manager",
+  "location": "Atlanta, GA metro",
+  "years": 10,
+  "creds": [
+   "SHRM-CP"
+  ],
+  "systems": [
+   "Workday",
+   "ADP Vantage",
+   "Oracle",
+   "SAP",
+   "Power BI"
+  ],
+  "specialties": [
+   "Full-cycle recruiting",
+   "Multi-site HR",
+   "Manufacturing & distribution"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "10+ years in HR, including full-cycle recruiting for multi-site manufacturing, distribution and logistics employers"
+ },
+ {
+  "code": "GR-23",
+  "title": "Human Resource Generalist",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Workday"
+  ],
+  "specialties": [
+   "Recruiting in Workday",
+   "Manufacturing & supply-chain hiring",
+   "Solo HR department"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Runs HR solo today and has recruited manufacturing and supply-chain roles in Workday"
+ },
+ {
+  "code": "GR-24",
+  "title": "HR Generalist",
+  "location": "Atlanta, GA metro",
+  "years": 5,
+  "systems": [
+   "Paycom"
+  ],
+  "specialties": [
+   "Recruiting & onboarding",
+   "Homebuilding & construction hiring",
+   "Multi-site workforce (2,000+)"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Former junior recruiter, now an HR generalist supporting 2,000+ employees across sites, including recruiting"
+ },
+ {
+  "code": "GR-25",
+  "title": "Onsite Recruiter",
+  "location": "Northwest Georgia",
+  "years": 15,
+  "specialties": [
+   "Onsite staffing recruiting",
+   "Manufacturing & industrial hiring",
+   "Payroll for 250+ employees"
+  ],
+  "work_mode": "Onsite",
+  "highlight": "15+ years of HR and recruiting for manufacturing plants; managed payroll for 250+ employees across shifts"
+ },
+ {
+  "code": "GR-26",
+  "title": "Recruiting Coordinator",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Greenhouse",
+   "Lever",
+   "Paycom"
+  ],
+  "specialties": [
+   "Recruiting coordination",
+   "IT & data roles",
+   "Sales, admin & accounting hiring"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Recruiting coordinator for IT, data, sales and accounting roles, working in Greenhouse, Lever and Paycom"
+ },
+ {
+  "code": "GR-27",
+  "title": "HR Coordinator",
+  "location": "Northeast Georgia",
+  "creds": [
+   "SHRM-CP"
+  ],
+  "specialties": [
+   "Recruiting support",
+   "Construction & manufacturing hiring",
+   "Healthcare & admin roles"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "SHRM-CP HR coordinator who supports hiring for construction, manufacturing, healthcare and admin roles"
+ },
+ {
+  "code": "GR-28",
+  "title": "HR Business Partner",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "LinkedIn Recruiter",
+   "Bullhorn",
+   "Taleo",
+   "Juicebox",
+   "Apollo"
+  ],
+  "specialties": [
+   "Sourcing & recruiting",
+   "IT (AWS, data, architects)",
+   "Accounting & finance hiring",
+   "Healthcare & marketing roles"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "HRBP who sources with LinkedIn Recruiter, Juicebox and Apollo and recruits IT, finance and healthcare roles"
+ },
+ {
+  "code": "GR-29",
+  "title": "HR Professional",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Recruiting & talent acquisition",
+   "HR coordination",
+   "Manufacturing & construction"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "HR professional with a recruiting and talent acquisition background in manufacturing and construction"
+ },
+ {
+  "code": "GR-30",
+  "title": "HR & Operations Manager",
+  "location": "Atlanta, GA metro",
+  "creds": [
+   "SHRM-CP"
+  ],
+  "systems": [
+   "iCIMS"
+  ],
+  "specialties": [
+   "Recruiting in iCIMS",
+   "Veterinary practice hiring",
+   "Healthcare & sales roles"
+  ],
+  "work_mode": "Hybrid",
+  "highlight": "SHRM-CP HR and operations manager at a veterinary practice who recruits in iCIMS and oversees 30-45 staff"
+ },
+ {
+  "code": "GR-31",
+  "title": "HR Consultant - Talent Acquisition",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Talent acquisition",
+   "Campus recruiting",
+   "Banking"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Talent acquisition consultant with banking-industry experience who wants campus recruiting work"
+ },
+ {
+  "code": "GR-32",
+  "title": "Talent Acquisition Associate",
+  "location": "Gainesville, GA metro",
+  "years": 5,
+  "systems": [
+   "Workday",
+   "ADP"
+  ],
+  "specialties": [
+   "High-volume recruiting",
+   "Multi-site manufacturing hiring",
+   "Full-cycle (sourcing to onboarding)",
+   "Bilingual English/Spanish"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Bilingual TA pro promoted internally to lead full-cycle, high-volume hiring across multiple plant locations"
+ },
+ {
+  "code": "GR-33",
+  "title": "Recruiter",
+  "location": "Gainesville, GA metro",
+  "systems": [
+   "LinkedIn Recruiter"
+  ],
+  "specialties": [
+   "Construction recruiting",
+   "Superintendents & project managers",
+   "Safety directors & chief estimators",
+   "Bilingual"
+  ],
+  "work_mode": "Prefers onsite",
+  "highlight": "Recruits superintendents, project managers, safety directors and chief estimators for a construction firm"
+ },
+ {
+  "code": "GR-34",
+  "title": "Senior Recruiter",
+  "location": "Tampa, FL metro",
+  "specialties": [
+   "Multi-state field recruiting",
+   "Life-safety services",
+   "Georgia & Texas markets"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Senior recruiter on a 30-person team covering 37 states; carried 15-30 open reqs across Georgia and Texas"
+ },
+ {
+  "code": "GR-35",
+  "title": "Director of Professional Services, East Coast",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Bullhorn"
+  ],
+  "specialties": [
+   "Staffing division leadership",
+   "Perm & contract placement",
+   "IT, engineering & healthcare",
+   "Revenue cycle & medical records staffing"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Staffing leader (incl. healthcare): placed 500+ contractors in healthcare support, billing and medical records"
+ },
+ {
+  "code": "GR-36",
+  "title": "Director of Recruiting",
+  "location": "Atlanta, GA metro",
+  "years": 7,
+  "systems": [
+   "Workable",
+   "LinkedIn"
+  ],
+  "specialties": [
+   "Healthcare tech recruiting (RNs, clinical)",
+   "Sales & operations hiring",
+   "ATS selection & rollout"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Healthcare recruiting leader who ran a 60-nurses-in-30-days push and grew the team from 1 to 4 as headcount hit 700"
+ },
+ {
+  "code": "GR-37",
+  "title": "Sr Talent Acquisition Specialist",
+  "location": "Detroit, MI metro",
+  "systems": [
+   "Bullhorn",
+   "iCIMS"
+  ],
+  "specialties": [
+   "IT (AWS, data, cloud)",
+   "Engineering & manufacturing",
+   "Accounting & finance",
+   "Healthcare & sales"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Senior TA specialist recruiting IT, engineering, manufacturing, finance and healthcare roles in Bullhorn and iCIMS"
+ },
+ {
+  "code": "GR-38",
+  "title": "Corporate Recruiter",
+  "location": "Jacksonville, FL metro",
+  "years": 10,
+  "systems": [
+   "Bullhorn",
+   "LinkedIn Recruiter",
+   "UltiPro",
+   "Oracle"
+  ],
+  "specialties": [
+   "Corporate & exempt recruiting",
+   "High-volume warehouse & call center",
+   "Seasonal hiring"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Fills 70-80 roles a year with a 17-day average time-to-fill while carrying 10-15 open reqs"
+ },
+ {
+  "code": "GR-39",
+  "title": "Senior Technical Recruiter",
+  "location": "Jacksonville, FL metro",
+  "systems": [
+   "Bullhorn",
+   "Taleo"
+  ],
+  "specialties": [
+   "Technical recruiting (AWS, data, Java)",
+   "Engineering & construction",
+   "Accounting & finance"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Senior technical recruiter covering AWS, data and Java roles plus engineering, finance and legal in Bullhorn and Taleo"
+ },
+ {
+  "code": "GR-40",
+  "title": "Talent Acquisition Recruiter",
+  "location": "Detroit, MI metro",
+  "systems": [
+   "Workday",
+   "Oracle HCM Cloud"
+  ],
+  "specialties": [
+   "Talent acquisition",
+   "Manufacturing",
+   "Healthcare"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "TA recruiter with a new master's degree, recruiting manufacturing, healthcare and admin roles in Workday and Oracle HCM"
+ },
+ {
+  "code": "GR-41",
+  "title": "Corporate Recruiter",
+  "location": "Jacksonville, FL metro",
+  "specialties": [
+   "High-volume recruiting",
+   "Retail"
+  ],
+  "work_mode": "Onsite",
+  "highlight": "Corporate recruiter in a high-volume retail hiring environment"
+ },
+ {
+  "code": "GR-42",
+  "title": "Senior Talent Acquisition Specialist",
+  "location": "Detroit, MI metro",
+  "years": 15,
+  "systems": [
+   "Bullhorn",
+   "Greenhouse",
+   "PCRecruiter",
+   "Workday"
+  ],
+  "specialties": [
+   "Executive recruiting",
+   "IT & data",
+   "Engineering & manufacturing",
+   "Accounting & finance"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Senior executive recruiter with 15+ years across IT, engineering, finance, construction and agriculture"
+ },
+ {
+  "code": "GR-43",
+  "title": "Talent Acquisition Specialist",
+  "location": "Detroit, MI metro",
+  "systems": [
+   "Bullhorn",
+   "JobAdder",
+   "eEmpact"
+  ],
+  "specialties": [
+   "Agency recruiting",
+   "Manufacturing",
+   "Admin & accounting support"
+  ],
+  "work_mode": "Hybrid",
+  "highlight": "TA specialist at a staffing franchise, recruiting manufacturing, admin and accounting roles in Bullhorn and JobAdder"
  }
 ]

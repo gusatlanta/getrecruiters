@@ -368,7 +368,7 @@ def profiles_section(kicker, h2, sub):
     <a href="request-talent.html" class="btn btn-outline-dark" style="flex-shrink:0;">Tell Us What You Need →</a>
   </div>
   <div class="mpc-marquee" aria-label="Candidates we are representing">
-    <div class="mpc-track">{"".join(cards)}{dup}</div>
+    <div class="mpc-track" style="animation-duration:{max(60, len(cards) * 5)}s">{"".join(cards)}{dup}</div>
   </div>
 </section>
 '''
