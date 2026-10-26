@@ -1,0 +1,219 @@
+[
+ {
+  "code": "GR-01",
+  "title": "Talent Acquisition Consultant",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Physician assistants & medical assistants",
+   "Imaging techs (X-ray, MRI, IR)",
+   "Front office / patient check-in",
+   "Physical therapy support",
+   "Finance, IT & admin roles"
+  ],
+  "work_mode": "Remote or Hybrid (prefers hybrid)",
+  "highlight": "Healthcare recruiter: built a specialty medical group's hiring process from scratch; ~45 open reqs, time-to-fill under 30 days"
+ },
+ {
+  "code": "GR-02",
+  "title": "VP, Centralized Search & Operations",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "ATS & VMS platforms",
+   "Microsoft Office",
+   "Google Workspace"
+  ],
+  "specialties": [
+   "Staffing agency operations",
+   "Centralized search & sourcing",
+   "AI candidate matching",
+   "Client relationship growth"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Grew weekly staffing revenue from $650K to over $1.2M and helped build AI candidate matching inside the ATS"
+ },
+ {
+  "code": "GR-03",
+  "title": "Senior Talent Acquisition Recruiter",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Greenhouse",
+   "Workday",
+   "iCIMS",
+   "Taleo",
+   "LinkedIn Recruiter"
+  ],
+  "specialties": [
+   "Accounting & finance",
+   "IT (cloud, data engineering)",
+   "Engineering",
+   "Legal",
+   "Sales & marketing"
+  ],
+  "work_mode": "Hybrid (open to remote or onsite)",
+  "highlight": "Led a company-wide Greenhouse ATS rollout, writing the training and teaching leadership to use it"
+ },
+ {
+  "code": "GR-04",
+  "title": "Talent Acquisition and Recruiting Leader",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Bullhorn",
+   "iCIMS",
+   "LinkedIn Recruiter",
+   "Indeed",
+   "ZipRecruiter"
+  ],
+  "specialties": [
+   "Healthcare",
+   "IT (AWS, data, Java)",
+   "Engineering",
+   "Accounting & finance",
+   "Recruiter team leadership"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "At a national staffing firm: 532 contract placements and $1M+ yearly billings; 1,000+ career hires; leads ~40 people"
+ },
+ {
+  "code": "GR-05",
+  "title": "Talent Acquisition Manager",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Salesforce",
+   "LinkedIn",
+   "PracticeMatch",
+   "Doximity",
+   "DocCafe"
+  ],
+  "specialties": [
+   "Physician & provider recruiting",
+   "Healthcare staffing",
+   "Recruiting team leadership"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Healthcare recruiter: hired and leads a 12-person recruiting team and improved team performance by 30%"
+ },
+ {
+  "code": "GR-06",
+  "title": "Recruiter",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Greenhouse",
+   "Jobvite",
+   "Bullhorn",
+   "Workday",
+   "Salesforce"
+  ],
+  "specialties": [
+   "Construction",
+   "Life-safety & fire protection trades",
+   "Onboarding"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "MBA-holding recruiter for construction and life-safety trades who works across Greenhouse, Jobvite, Bullhorn and Workday"
+ },
+ {
+  "code": "GR-07",
+  "title": "Clinical Healthcare Recruiter",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Clinical healthcare roles",
+   "Hard-to-fill positions",
+   "Strategic sourcing & talent pools"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Healthcare recruiter who builds strong clinical talent pools and closes hard-to-fill positions"
+ },
+ {
+  "code": "GR-08",
+  "title": "Recruiter",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Healthcare recruiting",
+   "Travel nurse recruiting",
+   "Onboarding"
+  ],
+  "work_mode": "Onsite",
+  "highlight": "Healthcare recruiter at a health insurer who took over onboarding too, covering two jobs; earlier recruited travel nurses"
+ },
+ {
+  "code": "GR-09",
+  "title": "Healthcare Recruiter",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "Bullhorn",
+   "Top Echelon",
+   "Workday",
+   "Salesforce",
+   "Paylocity"
+  ],
+  "specialties": [
+   "Multi-site healthcare & physician groups"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Healthcare recruiter for multi-site physician groups, working in Bullhorn, Top Echelon, Workday and Salesforce"
+ },
+ {
+  "code": "GR-10",
+  "title": "Recruiter",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Multi-site healthcare & physician groups",
+   "Candidate pre-screening"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Healthcare recruiter whose careful pre-screening saves hiring managers time"
+ },
+ {
+  "code": "GR-11",
+  "title": "Recruiter",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Hospital & health system hiring",
+   "ICU / critical care roles"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Healthcare recruiter praised by a large health system for recruiting ICU roles"
+ },
+ {
+  "code": "GR-12",
+  "title": "Recruiter",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Healthcare & physician groups",
+   "ATS selection & rollout",
+   "Building a first recruiting function"
+  ],
+  "work_mode": "Remote, Hybrid or Onsite",
+  "highlight": "Got a 25-year-old company to replace its ATS, ran the 8-week rollout, and lifted results 20%"
+ },
+ {
+  "code": "GR-13",
+  "title": "HR Administrator",
+  "location": "Atlanta, GA metro",
+  "systems": [
+   "ADP Workforce Now",
+   "iCIMS"
+  ],
+  "specialties": [
+   "Onboarding",
+   "New hires & terminations",
+   "Manufacturing & admin hiring",
+   "Multi-state sites"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Set up a staffing agency partnership with the best rates in 2 of the 3 states where the company has sites"
+ },
+ {
+  "code": "GR-14",
+  "title": "Human Resource Recruiter",
+  "location": "Atlanta, GA metro",
+  "specialties": [
+   "Behavioral health",
+   "Pay benchmarking",
+   "Offer strategy",
+   "HR & benefits admin"
+  ],
+  "work_mode": "Remote or Hybrid",
+  "highlight": "Healthcare recruiter (behavioral health) who raised offer acceptance 10% with market research and pay benchmarking"
+ }
+]
