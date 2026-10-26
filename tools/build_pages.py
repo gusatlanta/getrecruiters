@@ -374,7 +374,7 @@ def profiles_section(kicker, h2, sub):
 '''
 
 
-PROFILES = profiles_section('Recruiters Available Now', "Recruiters We're <em>Representing</em> Right Now", "Screened recruiters and talent pros who completed our candidate questionnaire. Names are hidden to protect confidentiality — ask about anyone and we'll make the introduction.")
+PROFILES = profiles_section('Recruiters Available Now', "Recruiters We're <em>Representing</em> Right Now", "Screened recruiters and talent pros who completed our candidate questionnaire or recruiter application. Names are hidden to protect confidentiality — ask about anyone and we'll make the introduction.")
 
 AUDIENCE_STEPS = '''<li><strong>We build your list</strong> — the exact people you want to hire.</li>
         <li><strong>Our AI recruiting assistant writes the letter with you</strong> — then reaches out and invites them to apply for your job.</li>
@@ -510,12 +510,8 @@ HOME = '''
 })();
 </script>
 
-<!-- Candidate spotlights (blinded: no name, employer or school), fed from 100xrecruiting.com.
-     data-only keeps recruiting and HR candidates only; the strip stays hidden when none match. -->
-<div id="hx-spotlights" style="background:#f4f9fb;"></div>
-<script src="https://100xrecruiting.com/static/spotlight_ticker.js?v=2" data-target="hx-spotlights" data-theme="light"
-        data-only="recruiter,recruiting,sourcer,sourcing,talent acquisition,human resources,hr manager,hr generalist,hr business partner,people operations"
-        data-fallback="{{SITE}}/contact.html" defer></script>
+<!-- The 100X spotlight strip is off here: only 2 recruiting profiles matched it, so it repeated them.
+     The blinded cards below (questionnaire + Recruiter Application) are the spotlight now. -->
 ''' + PROFILES + '''
 <!-- ── Stats strip ───────────────────────────── -->
 <div class="hero-stats">
