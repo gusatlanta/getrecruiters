@@ -432,6 +432,18 @@ HOME_HEAD = '''
 
 HOME = '''
 <!-- ── Hero ─────────────────────────────────── -->
+<!-- ── Salary guide banner ────────────────────── -->
+<a class="guide-band" href="https://100xworkforce.com/salary-guide/recruiters" target="_blank" rel="noopener">
+  <div class="container guide-band-inner">
+    <img class="guide-band-cover" src="https://100xworkforce.com/static/marketing/guides/100x-workforce-recruiters-cover.png" alt="" width="46" height="60">
+    <div class="guide-band-text">
+      <strong>New: the 2026 Recruiter Salary Guide</strong>
+      <span>What recruiters are asking to be paid, from 737 recruiters who applied with us. Typical ask: $81K.</span>
+    </div>
+    <span class="guide-band-go">Get the Free Guide &rarr;</span>
+  </div>
+</a>
+
 <section class="hero">
   <div class="container hero-grid">
     <div class="hero-inner">

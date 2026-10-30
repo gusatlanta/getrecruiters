@@ -792,3 +792,19 @@ footer { background: #081a33; padding: 64px 0 30px; color: rgba(255,255,255,.6);
 
 /* GetRecruiters: four service cards in one row on wide screens */
 @media (min-width: 1081px) { .service-cards.four { grid-template-columns: repeat(4, 1fr); } }
+
+/* Salary guide banner at the top of the home page */
+.guide-band { display: block; background: linear-gradient(90deg, #136b99 0%, #1f8ab5 100%); color: var(--white); text-decoration: none; }
+.guide-band-inner { display: flex; align-items: center; gap: 18px; padding-top: 12px; padding-bottom: 12px; }
+.guide-band-cover { width: 46px; height: auto; flex: none; border-radius: 4px; box-shadow: 0 4px 12px rgba(11,31,61,.35); }
+.guide-band-text { display: grid; gap: 2px; flex: 1; min-width: 0; }
+.guide-band-text strong { font-family: var(--font-head); font-size: 1.12rem; font-weight: 600; color: var(--white); line-height: 1.25; }
+.guide-band-text span { font-size: .9rem; color: rgba(255,255,255,.92); line-height: 1.4; }
+.guide-band-go { flex: none; padding: 10px 20px; border-radius: 999px; background: var(--white); color: var(--blue-dark); font-size: .92rem; font-weight: 600; white-space: nowrap; transition: transform .2s, box-shadow .2s; }
+.guide-band:hover .guide-band-go { transform: translateY(-1px); box-shadow: 0 8px 22px rgba(0,0,0,.18); }
+@media (max-width: 720px) {
+  .guide-band-cover { display: none; }
+  .guide-band-inner { flex-wrap: wrap; gap: 10px; }
+  .guide-band-text { flex-basis: 100%; }
+  .guide-band-go { width: 100%; text-align: center; }
+}
