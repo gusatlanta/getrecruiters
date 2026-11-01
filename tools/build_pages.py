@@ -120,6 +120,7 @@ FOOTER = '''
         <ul>
           <li><a href="virtual-recruiters.html">Virtual Recruiters</a></li>
           <li><a href="hire-recruiters.html">Hire Recruiters</a></li>
+          <li><a href="ai-recruiting.html">AI Recruiting</a></li>
           <li><a href="about.html#industries">Industries</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="partners.html">Partner Program</a></li>
@@ -636,7 +637,7 @@ HOME = '''
       <p class="ai-badge">100X AI Recruiting Agents · Free trial</p>
       <h2 class="section-title">Make More Internal Placements with AI</h2>
       <p>Give your in-house recruiting team our AI recruiting agents. They source, screen and reach out around the clock, so your team fills more roles internally and leans less on outside agencies.</p>
-      <p class="ai-note">Works for your own recruiters and for every recruiter we place.</p>
+      <p class="ai-note">Works for your own recruiters and for every recruiter we place. <a href="ai-recruiting.html">See how it works in ChatGPT, Claude, Grok or Gemini →</a></p>
       <div class="ai-actions">
         <a href="https://100xrecruiting.com" target="_blank" rel="noopener" class="btn btn-white btn-lg">Start Your Free Trial ↗</a>
         <a href="contact.html" class="btn btn-outline-white btn-lg">See a Demo</a>
@@ -1484,6 +1485,246 @@ PARTNERS = page_hero("Partner Program", "Join Our Partner Program",
 </section>
 '''
 
+# ───────────────────────────── AI recruiting ─────────────────────────────
+AI_HEAD = '''
+  <script src="js/ai-recruiting.js" defer></script>'''
+
+AI = '''
+<!-- ── Hero: the ask and Scout's answer ───────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-row">
+      <div class="hero-panel">
+        <p class="hero-eyebrow">100X AI Recruiting Agents · Free trial</p>
+        <h1 aria-label="Recruit in ChatGPT, Claude, Grok or Gemini"><span aria-hidden="true">Recruit in</span> <span class="ai-word" id="ai-word" aria-hidden="true">ChatGPT</span></h1>
+        <p class="hero-sub"><strong>Tell Scout who you need in plain words.</strong> It finds people, scores every match and lines up the best ones, right in the AI app you already use.</p>
+        <div class="hero-actions">
+          <a href="https://100xrecruiting.com" target="_blank" rel="noopener" class="btn btn-primary">Start Your Free Trial ↗</a>
+          <a href="#talk" class="btn btn-brown">See a Demo</a>
+        </div>
+        <p class="ai-fine">Unlimited job posts. Top 3 matches for every job. No download.</p>
+      </div>
+      <figure class="fab ai-chat">
+        <div class="ai-chat-bar">
+          <div class="ai-apps" role="group" aria-label="Show Scout in an AI app">
+            <button type="button" data-app="ChatGPT" aria-pressed="true">ChatGPT</button>
+            <button type="button" data-app="Claude" aria-pressed="false">Claude</button>
+            <button type="button" data-app="Grok" aria-pressed="false">Grok</button>
+            <button type="button" data-app="Gemini" aria-pressed="false">Gemini</button>
+          </div>
+          <span class="ai-connected">100X connected</span>
+        </div>
+        <p class="ai-ask">Use 100X to post a Senior Accountant job in Marietta, GA, then find me the best candidates.</p>
+        <div>
+          <p class="ai-who">Scout</p>
+          <ul class="ai-run">
+            <li>Drafting the job <em>you said yes</em></li>
+            <li>Posting it on 100X <em>matching starts</em></li>
+            <li>Searching résumés on file <em>5 matched</em></li>
+            <li>Ranking by must-haves <em>CPA · month-end close</em></li>
+          </ul>
+        </div>
+        <div>
+          <p class="ai-shortlist"><strong>Senior Accountant · Marietta, GA</strong><span>Top 3 of 5</span></p>
+          <ol>
+            <li class="fab-row"><span class="fab-rank">1</span><span class="fab-who"><strong>Marcus T.</strong><span>Senior Accountant · 8 yrs</span></span><span class="ai-score">94%</span></li>
+            <li class="fab-row"><span class="fab-rank">2</span><span class="fab-who"><strong>Priya S.</strong><span>Accounting Manager · 11 yrs</span></span><span class="ai-score">91%</span></li>
+            <li class="fab-row"><span class="fab-rank">3</span><span class="fab-who"><strong>Elena R.</strong><span>Senior Accountant · 6 yrs</span></span><span class="ai-score">88%</span></li>
+          </ol>
+        </div>
+        <figcaption class="ai-sample">A sample run. Names are made up.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ── Why it works ───────────────────────────── -->
+<section class="section">
+  <div class="container">
+    <span class="section-kicker">Always On</span>
+    <h2 class="section-title">Reach People <em>Before You Need Them</em></h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Never start from scratch when you need to hire. Scout keeps working day and night, so the best people are already lined up when a seat opens.</p>
+    <ul class="why-list">
+      <li><h3>Start with People Who Already Applied</h3><p>Your next hire may be sitting in your database. We refresh your prior résumés and match past applicants to seats on your org chart.</p></li>
+      <li><h3>Go Beyond Keywords</h3><p>Scout scores every match against your must-haves, with custom screening questions and a video résumé recorded for the job.</p></li>
+      <li><h3>Cover Every Seat, Open or Not</h3><p>Scout works every job at your company and lines up the best people for each seat before anyone quits.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Steps ──────────────────────────────────── -->
+<section class="section section-alt" id="how-it-works">
+  <div class="container">
+    <span class="section-kicker">How It Works</span>
+    <h2 class="section-title">Get Started in a Few Steps</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Sign up, post a job and Scout starts matching. Work on 100X or in your AI app.</p>
+    <ol class="ai-steps">
+      <li class="ai-step">
+        <span class="section-kicker">Step 1</span>
+        <h3>Post Your Job</h3>
+        <p>Write it yourself, or paste your careers page and we'll load every job. Posting is free and unlimited.</p>
+        <div class="ai-mock">
+          <p class="ai-mock-label"><span>Add your jobs</span></p>
+          <ul class="ai-add">
+            <li>Post a job</li>
+            <li>Paste your careers page</li>
+            <li>Import from your ATS</li>
+            <li>Upload your org chart</li>
+          </ul>
+        </div>
+      </li>
+      <li class="ai-step">
+        <span class="section-kicker">Step 2</span>
+        <h3>Let Scout Rank the Matches</h3>
+        <p>Scout screens and ranks everyone, then re-scores every night. New people surface and stale ones drop off.</p>
+        <div class="ai-mock">
+          <p class="ai-mock-label"><span>Controller, Atlanta</span><span>Sample</span></p>
+          <div class="ai-match"><span>R. M., Controller</span><span class="ai-score">92%</span><span class="ai-meter"><i style="--s:92%"></i></span></div>
+          <div class="ai-match"><span>D. K., Asst. Controller</span><span class="ai-score">86%</span><span class="ai-meter"><i style="--s:86%"></i></span></div>
+          <div class="ai-match"><span>T. S., Sr. Accountant</span><span class="ai-score">78%</span><span class="ai-meter"><i style="--s:78%"></i></span></div>
+        </div>
+      </li>
+      <li class="ai-step">
+        <span class="section-kicker">Step 3</span>
+        <h3>Pick Who You Like</h3>
+        <p>Set a match score and Scout invites those people to apply. Review the applications and choose who moves forward.</p>
+        <div class="ai-mock">
+          <p class="ai-mock-label"><span>Invite to Apply at 85+</span><span>Sample</span></p>
+          <div class="ai-invite"><span>R. M. · 92%</span><span class="ai-pill ai-pill-go">Invited</span></div>
+          <div class="ai-invite"><span>D. K. · 86%</span><span class="ai-pill ai-pill-go">Invited</span></div>
+          <div class="ai-invite"><span>T. S. · 78%</span><span class="ai-pill ai-pill-hold">Below your score</span></div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ── What Scout lines up ────────────────────── -->
+<section class="section section-dark">
+  <div class="container">
+    <span class="section-kicker">What You Get</span>
+    <h2 class="section-title">See What Scout <em>Lines Up</em></h2>
+    <div class="section-divider"></div>
+    <div class="ai-bench">
+      <article class="ai-tile ai-tile-org">
+        <div>
+          <h3>Every Seat on Your Org Chart, Always Covered</h3>
+          <p>The next resignation is a phone call instead of a crisis.</p>
+        </div>
+        <ul class="ai-tree">
+          <li>
+            <div class="ai-seat"><b>CFO</b><span>matches ready</span></div>
+            <ul>
+              <li>
+                <div class="ai-seat ai-seat-open"><b>Controller</b><span>open · matches ready</span></div>
+                <ul>
+                  <li><div class="ai-seat"><b>Sr. Accountant</b><span>matches ready</span></div></li>
+                </ul>
+              </li>
+              <li><div class="ai-seat ai-seat-later"><b>FP&amp;A Mgr</b><span>not open yet</span></div></li>
+            </ul>
+          </li>
+        </ul>
+        <p class="ai-tile-note">Sample org chart.</p>
+      </article>
+      <article class="ai-tile">
+        <h3>Screened Before You Read a Word</h3>
+        <p class="ai-q">Walk me through your monthly WIP process.</p>
+        <p>“I own it end to end. Percent completion, closed by day 5.”</p>
+        <p class="ai-tile-note">Sample screening answer, with a 0:58 video résumé recorded for this job.</p>
+      </article>
+      <article class="ai-tile">
+        <p class="ai-figure">$81K</p>
+        <p>The typical pay ask, based on 256 people. It comes from 737 recruiters who applied with us since January 2024.</p>
+        <a href="https://100xworkforce.com/salary-guide/recruiters" target="_blank" rel="noopener">Get the 2026 Recruiter Salary Guide ↗</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ── You stay in charge ─────────────────────── -->
+<section class="section">
+  <div class="container split">
+    <div>
+      <span class="section-kicker">Your Call, Every Time</span>
+      <h2 class="section-title">Built So You <em>Stay in Charge</em></h2>
+      <div class="section-divider"></div>
+      <p class="section-sub">Scout does the searching and screening. The hiring decisions stay with you.</p>
+    </div>
+    <div class="feature-list">
+      <div class="feature"><div class="feature-icon">[[ico:check]]</div><div><h4>You Pick Who You Like</h4><p>Scout finds, screens and ranks. You decide who moves forward.</p></div></div>
+      <div class="feature"><div class="feature-icon">[[ico:shield]]</div><div><h4>It Asks Before It Posts</h4><p>In your AI app, Scout checks with you before it posts anything.</p></div></div>
+      <div class="feature"><div class="feature-icon">[[ico:target]]</div><div><h4>You Set the Bar</h4><p>Choose the match score that triggers an automatic invite, job by job.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Resources ──────────────────────────────── -->
+<section class="section section-alt">
+  <div class="container">
+    <span class="section-kicker">Go Deeper</span>
+    <h2 class="section-title">Helpful Resources</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Post jobs free. Plans start at $149 a month, and every plan gets the <a href="https://www.skool.com/100xrecruiting" target="_blank" rel="noopener" class="ai-link">100X Skool community</a> and open office hours, Tuesdays and Thursdays at 10:30 AM ET.</p>
+    <ul class="services">
+      <li class="services-lead"><h3><a href="https://100xrecruiting.com/ai" target="_blank" rel="noopener">Connect Scout to Your AI App ↗</a></h3><p>Step by step for ChatGPT, Claude, Grok and Gemini.</p></li>
+      <li><h3><a href="https://100xrecruiting.com/platform" target="_blank" rel="noopener">How Scout Works ↗</a></h3><p>What your AI recruiting assistant does, from sourcing to screening.</p></li>
+      <li><h3><a href="https://100xrecruiting.com/sample" target="_blank" rel="noopener">Sample Shortlist ↗</a></h3><p>See what comes back for a job.</p></li>
+      <li><h3><a href="https://100xrecruiting.com/pricing" target="_blank" rel="noopener">Pricing ↗</a></h3><p>Compare the plans and start a 7-day free trial.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Talk to us ─────────────────────────────── -->
+<section class="section" id="talk">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <span class="section-kicker">See a Demo</span>
+        <h2 class="section-title">Want to Talk to Someone?</h2>
+        <div class="section-divider"></div>
+        <p class="section-sub">The fastest way to start is the free trial. For a demo, multiple locations or an ATS connection, tell us about your team.</p>
+        <a href="https://100xrecruiting.com" target="_blank" rel="noopener" class="btn btn-primary" style="margin-top:18px;">Start Your Free Trial ↗</a>
+      </div>
+      <div class="form-card">
+        <h3>Tell Us About Your Team</h3>
+        <p class="form-intro">We'll get back to you within one business day.</p>
+        <form data-form="getrecruiters-contact" action="mailto:{{EMAIL}}" method="POST" enctype="text/plain">
+          <input type="hidden" name="notes" value="Asked from the AI Recruiting page">
+          <div class="form-row">
+            <div class="form-group"><label for="a-first">First Name *</label><input type="text" id="a-first" name="first_name" class="form-control" required></div>
+            <div class="form-group"><label for="a-last">Last Name *</label><input type="text" id="a-last" name="last_name" class="form-control" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="a-email">Work Email *</label><input type="email" id="a-email" name="email" class="form-control" required></div>
+            <div class="form-group"><label for="a-title">Job Title *</label><input type="text" id="a-title" name="your_title" class="form-control" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label for="a-company">Company *</label><input type="text" id="a-company" name="company" class="form-control" required></div>
+            <div class="form-group"><label for="a-topic">We Are…</label>
+              <select id="a-topic" name="topic" class="form-control">
+                <option>An employer hiring for our own team</option><option>A staffing or recruiting firm</option><option>Something else</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label for="a-openings">People You Hire in a Year</label>
+            <select id="a-openings" name="openings" class="form-control">
+              <option>1 to 10</option><option>11 to 50</option><option>51 to 200</option><option>More than 200</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Send Message →</button>
+          <div class="alert alert-success">✓ Message sent! We'll be in touch within one business day.</div>
+        </form>
+        <p class="form-note" style="margin-top:20px;">Privacy: we use what you send only to respond to you, and we never sell your information.</p>
+      </div>
+    </div>
+  </div>
+</section>
+''' + cta("Need a Recruiter to Run It?",
+          "Scout works for your own recruiters and for every recruiter we place. Tell us what you're hiring for.")
+
 PAGES = [
     ("index.html", "Virtual Recruiters &amp; Recruiter Staffing | GetRecruiters Group",
      "Rent a dedicated virtual recruiter or hire recruiters for your team — temp, temp-to-perm, or direct hire. Data centers, trades, healthcare, public accounting, financial services, and more.",
@@ -1506,6 +1747,9 @@ PAGES = [
     ("partners.html", "Partner Program | Refer &amp; Earn | GetRecruiters Group",
      "Refer a company that needs recruiting help — earn 10% on direct hire placements and 25% of temp net spread.",
      PARTNERS, None, ""),
+    ("ai-recruiting.html", "Recruit in ChatGPT, Claude, Grok or Gemini | GetRecruiters Group",
+     "Tell Scout who you need in plain words. It finds people, scores every match and lines up the best ones, right in the AI app you already use.",
+     AI, None, AI_HEAD),
 ]
 
 if __name__ == "__main__":
