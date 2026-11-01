@@ -121,6 +121,7 @@ FOOTER = '''
           <li><a href="virtual-recruiters.html">Virtual Recruiters</a></li>
           <li><a href="hire-recruiters.html">Hire Recruiters</a></li>
           <li><a href="ai-recruiting.html">AI Recruiting</a></li>
+          <li><a href="salary-guide.html">Salary Guide</a></li>
           <li><a href="about.html#industries">Industries</a></li>
           <li><a href="about.html">About Us</a></li>
           <li><a href="partners.html">Partner Program</a></li>
@@ -429,7 +430,7 @@ HOME_HEAD = '''
 
 GUIDE = '''
 <!-- ── Salary guide banner ────────────────────── -->
-<a class="guide-band" href="https://100xworkforce.com/salary-guide/recruiters" target="_blank" rel="noopener">
+<a class="guide-band" href="salary-guide.html">
   <div class="container guide-band-inner">
     <span class="guide-band-cover" aria-hidden="true">2026<small>Salary Guide</small></span>
     <div class="guide-band-text">
@@ -1639,7 +1640,7 @@ AI = '''
       <article class="ai-tile">
         <p class="ai-figure">$81K</p>
         <p>The typical pay ask, based on 256 people. It comes from 737 recruiters who applied with us since January 2024.</p>
-        <a href="https://100xworkforce.com/salary-guide/recruiters" target="_blank" rel="noopener">Get the 2026 Recruiter Salary Guide ↗</a>
+        <a href="salary-guide.html">Get the 2026 Recruiter Salary Guide →</a>
       </article>
     </div>
   </div>
@@ -1726,8 +1727,79 @@ AI = '''
 ''' + cta("Need a Recruiter to Run It?",
           "Scout works for your own recruiters and for every recruiter we place. Tell us what you're hiring for.")
 
+# ───────────────────────────── Salary guide ─────────────────────────────
+SALARY_HEAD = '''
+  <script src="js/salary-guide.js" defer></script>'''
+
+SALARY = '''
+<!-- ── Opt-in Hero ────────────────────────────── -->
+<section class="optin-hero">
+  <div class="container">
+    <div class="hero-badge">Free · 10 pages</div>
+    <h1>Know What Recruiters<br>Expect to Be Paid</h1>
+    <p>What we're seeing from 737 recruiters who applied with us since January 2024. Every number shows how many people it rests on.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0;background:var(--off-white);">
+  <div class="container">
+    <div class="optin-layout">
+      <div class="optin-pitch">
+        <span class="section-label">Inside the Guide</span>
+        <h2 class="section-title" style="font-size:1.6rem;">Typical Asks by Title</h2>
+        <table class="sg-table"><tbody>
+          <tr><td>Recruiter / Talent Acquisition</td><td class="n">$80K</td></tr>
+          <tr><td>Senior Recruiter</td><td class="n">$92.5K</td></tr>
+          <tr><td>Recruiting Manager / Director</td><td class="n">$120K</td></tr>
+        </tbody></table>
+        <p class="sg-note">Desired base salary, median, based on 252 people who applied with us (January 2024 – October 2026). The guide also has the middle-half range and the lowest pay people say they'd take.</p>
+        <ul class="sg-inside">
+          <li>Their most recent yearly billing</li>
+          <li>How they want to be paid</li>
+          <li>Years of full-cycle recruiting</li>
+          <li>How often they talk with hiring managers</li>
+          <li>Where they'll work: hybrid, in the office, or remote</li>
+          <li>Why they're looking, in their own words</li>
+          <li>The recruiting tools and job boards they use</li>
+          <li>Metro Atlanta pay and turnover from the BLS</li>
+        </ul>
+        <p class="sg-note">Only group totals are shown. No one's individual answers are in the guide. Groups under 5 people are left out.</p>
+      </div>
+
+      <div class="form-card form-card--lift">
+        <form id="guide-form" novalidate>
+          <div class="sg-head">
+            <div>
+              <h3>Get the Salary Guide</h3>
+              <p class="form-intro">10 pages. Download it right away.</p>
+            </div>
+            <img class="sg-cover" src="img/getrecruiters-recruiters-cover.png" alt="Cover of the GetRecruiters Salary Guide 2026: Recruiters" width="92" height="119">
+          </div>
+          <input type="hidden" name="brand" value="gr">
+          <input type="hidden" name="guide" value="recruiters">
+          <div class="sg-hp" aria-hidden="true"><label for="g-website">Website</label><input id="g-website" name="website" tabindex="-1" autocomplete="off"></div>
+          <div class="form-group"><label for="g-name">Your Name *</label><input type="text" id="g-name" name="name" class="form-control" autocomplete="name" required></div>
+          <div class="form-group"><label for="g-email">Work Email *</label><input type="email" id="g-email" name="email" class="form-control" autocomplete="email" required></div>
+          <div class="form-group"><label for="g-company">Company *</label><input type="text" id="g-company" name="company" class="form-control" autocomplete="organization" required></div>
+          <div class="form-group"><label for="g-title">Your Title</label><input type="text" id="g-title" name="title" class="form-control" autocomplete="organization-title"></div>
+          <button type="submit" id="g-go" class="btn btn-primary btn-lg btn-block">Download the Salary Guide →</button>
+          <p class="sg-err" id="g-err" hidden></p>
+          <p class="form-note">We'll follow up about hiring now and then. You can tell us to stop any time.</p>
+        </form>
+        <div class="sg-done" id="g-done" hidden>
+          <h3>Your guide is ready.</h3>
+          <a class="btn btn-primary btn-lg" href="downloads/GetRecruiters-Salary-Guide-2026-Recruiters.pdf">Download the PDF</a>
+          <a href="downloads/getrecruiters-salary-guide-recruiters.html">Or read it online</a>
+          <p class="form-note">Hiring now? <a href="request-talent.html">Tell us who you need</a> and we'll send your Fab Five™.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+'''
+
 PAGES = [
-    ("index.html", "Virtual Recruiters &amp; Recruiter Staffing | GetRecruiters Group",
+    ("index.html","Virtual Recruiters &amp; Recruiter Staffing | GetRecruiters Group",
      "Rent a dedicated virtual recruiter or hire recruiters for your team — temp, temp-to-perm, or direct hire. Data centers, trades, healthcare, public accounting, financial services, and more.",
      HOME, faq_schema(), HOME_HEAD),
     ("virtual-recruiters.html", "Dedicated Virtual Recruiters | GetRecruiters Group",
@@ -1751,6 +1823,9 @@ PAGES = [
     ("ai-recruiting.html", "Recruit in ChatGPT, Claude, Grok or Gemini | GetRecruiters Group",
      "Tell Scout who you need in plain words. It finds people, scores every match and lines up the best ones, right in the AI app you already use.",
      AI, None, AI_HEAD),
+    ("salary-guide.html", "2026 Recruiter Salary Guide | GetRecruiters Group",
+     "What recruiters are asking to be paid: pay asks by title, billing and work setup, from 737 recruiters who applied with us. Free download.",
+     SALARY, None, SALARY_HEAD),
 ]
 
 if __name__ == "__main__":

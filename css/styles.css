@@ -919,3 +919,16 @@ footer { background: var(--off-white); border-top: 1px solid var(--border); padd
   .ai-steps, .ai-bench { grid-template-columns: minmax(0, 1fr); }
   .ai-tile-org { grid-row: auto; }
 }
+
+/* ── Salary guide page ────────────────────────── */
+.sg-table { width: 100%; margin-top: 18px; border-collapse: collapse; }
+.sg-table td { padding: 10px 0; border-bottom: 1px solid var(--border); color: var(--text); }
+.sg-table .n { text-align: right; font-weight: 600; color: var(--brand-text); font-variant-numeric: tabular-nums; }
+.sg-note { margin-top: 10px; font-size: .82rem; color: var(--text-muted); }
+.sg-inside { display: grid; gap: 8px; margin-top: 20px; padding-left: 18px; font-size: .95rem; color: var(--text); }
+.sg-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 18px; }
+.sg-cover { flex: none; width: 92px; height: auto; border: 1px solid var(--border); border-radius: 4px; box-shadow: var(--shadow); }
+.sg-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.sg-err { margin-top: 10px; font-size: .9rem; color: #b91c1c; }
+.sg-done { display: grid; justify-items: center; gap: 12px; text-align: center; }
+.sg-done a:not(.btn) { color: var(--brand-text); text-decoration: underline; text-underline-offset: 3px; }
