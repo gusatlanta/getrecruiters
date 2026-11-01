@@ -73,7 +73,11 @@ def fill(html):
             .replace("{{SITE}}", SITE).replace("{{UNS}}", UNS))
 
 
-BRAND = '<img src="img/getrecruiters-logo.png" alt="GetRecruiters Group — powered by NorthPoint" class="brand-logo" width="212" height="58">'
+DIE = ('<svg class="die" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7"/>'
+       '<circle cx="8" cy="8" r="3.2"/><circle cx="22" cy="8" r="3.2"/><circle cx="15" cy="15" r="3.2"/>'
+       '<circle cx="8" cy="22" r="3.2"/><circle cx="22" cy="22" r="3.2"/></svg>')
+BRAND = ('<span class="brand-lockup"><span class="brand-word">getrecruiters' + DIE + '</span>'
+         '<span class="brand-tag">Recruiters for Anything</span></span>')
 
 NAV = '''
 <!-- ── Navigation ───────────────────────────── -->
@@ -192,7 +196,7 @@ def head(file, title, desc, extra_schema=None, extra_head=""):
   <meta name="twitter:title" content="{title}">
   <meta name="twitter:description" content="{desc}">
   <meta name="twitter:image" content="{SITE}/img/og-image.png">
-  <meta name="theme-color" content="#0b1f3d">
+  <meta name="theme-color" content="#ff6200">
   <script type="application/ld+json">
 {schema}
   </script>
@@ -327,54 +331,44 @@ def example(style=""):
     return EXAMPLE.replace("{style}", f' style="{style}"' if style else "")
 
 
-def profiles_section(kicker, h2, sub):
-    """Blinded candidate cards from tools/profiles.json (no names, employers, or schools).
-    Each card links to the request form with its code; tools/candidate_key.local.json
-    (never published) says who each code is."""
-    import html as _h
+TRACK_HR = r"\b(hr|human resources?|people|benefits|payroll)\b"
+TRACK_LEAD = r"\b(head|chief|director|vp|vice president|manager|lead|leader)\b"
+SECTORS = [("Accounting & Finance", r"accounting|financ|cpa|audit"), ("Healthcare", r"health|nurs|clinic|medical|patient"),
+           ("IT & Technology", r"software|\bit\b|technolog"), ("Engineering & Manufacturing", r"engineer|manufactur"),
+           ("Sales & Marketing", r"sales|marketing"), ("Executive Search", r"executive|c-suite"),
+           ("High-volume hiring", r"high.volume")]
+
+
+def bench_track(title):
+    t = title.lower()
+    if re.search(TRACK_HR, t) and "recruit" not in t:
+        return "hr"
+    if re.search(r"\bsourc|coordinator|scheduler", t):
+        return "support"
+    if re.search(TRACK_LEAD, t):
+        return "ta"
+    return "full"
+
+
+def bench_json():
+    """Blinded recruiter rows for the home page search, from tools/profiles.json (no names,
+    employers, or schools). Each row links to the request form with its code;
+    tools/candidate_key.local.json (never published) says who each code is."""
     path = Path(__file__).resolve().parent / "profiles.json"
-    items = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
-    if not items:
-        return ""
-    e = lambda s: _h.escape(str(s), quote=True)
-    cards = []
-    for p in items:
-        words = re.sub(r"[^A-Za-z ]", " ", p["title"]).split()
-        initials = "".join(w[0] for w in words[:2]).upper()
-        badges = [f'<span class="mpc-badge gold">{e(c)}</span>' for c in p.get("creds", [])[:2]]
-        if p.get("years"):
-            badges.append(f'<span class="mpc-badge">{e(p["years"])}+ yrs</span>')
-        if p.get("work_mode"):
-            badges.append(f'<span class="mpc-badge green">{e(p["work_mode"])}</span>')
-        badges += [f'<span class="mpc-badge">{e(s)}</span>' for s in p.get("specialties", [])[:2]]
-        win = (f'<div class="mpc-card-win"><span class="mpc-win-label">Track record</span>'
-               f'<span class="mpc-win-text">{e(p["highlight"])}</span></div>') if p.get("highlight") else ""
-        cards.append(f'<a class="mpc-card" href="request-talent.html?candidate={e(p["code"])}">'
-                     f'<div class="mpc-card-head"><div class="mpc-avatar">{e(initials)}</div>'
-                     f'<div><div class="mpc-card-title">{e(p["title"])}</div>'
-                     f'<div class="mpc-card-loc">[[ico:pin]] {e(p.get("location") or "")}</div></div></div>'
-                     f'<div class="mpc-badges">{"".join(badges)}</div>{win}'
-                     f'<span class="mpc-card-cta">Ask about {e(p["code"])} →</span></a>')
-    dup = "".join(cards).replace('<a class="mpc-card"', '<a class="mpc-card" aria-hidden="true" tabindex="-1"')
-    return f'''
-<!-- ── Candidates we're representing (blinded) ── -->
-<section class="section" id="talent" style="padding-bottom:16px;">
-  <div class="container section-head">
-    <div>
-      <span class="section-kicker">{kicker}</span>
-      <h2 class="section-title">{h2}</h2>
-      <p class="section-sub">{sub}</p>
-    </div>
-    <a href="request-talent.html" class="btn btn-outline-dark" style="flex-shrink:0;">Tell Us What You Need →</a>
-  </div>
-  <div class="mpc-marquee" aria-label="Candidates we are representing">
-    <div class="mpc-track" style="animation-duration:{max(60, len(cards) * 5)}s">{"".join(cards)}{dup}</div>
-  </div>
-</section>
-'''
+    rows = []
+    for p in json.loads(path.read_text(encoding="utf-8")):
+        spec = p.get("specialties") or []
+        text = " ".join(spec).lower()
+        mode = p.get("work_mode") or ""
+        rows.append({
+            "code": p["code"], "title": p["title"], "track": bench_track(p["title"]), "yrs": p.get("years"),
+            "pills": spec[:2], "sectors": [name for name, rule in SECTORS if re.search(rule, text)],
+            "tools": (p.get("systems") or [])[:3], "modes": [m for m in ("Remote", "Hybrid", "Onsite") if m.lower() in mode.lower()],
+            "place": p.get("location") or "", "win": p.get("highlight") or "",
+            "backgrounds": [name for name, word in (("Agency", "agency"), ("In-house", "in-house")) if word in text],
+        })
+    return json.dumps(rows, ensure_ascii=False, separators=(",", ":")).replace("<", "\\u003c")
 
-
-PROFILES = profiles_section('Recruiters Available Now', "Recruiters We're <em>Representing</em> Right Now", "Screened recruiters and talent pros who completed our candidate questionnaire or recruiter application. Names are hidden to protect confidentiality — ask about anyone and we'll make the introduction.")
 
 AUDIENCE_STEPS = '''<li><strong>We build your list</strong> — the exact people you want to hire.</li>
         <li><strong>Our AI recruiting assistant writes the letter with you</strong> — then reaches out and invites them to apply for your job.</li>
@@ -428,14 +422,14 @@ HOME_HEAD = '''
   <script>
   /* Recruiting and HR openings from the 100X jobs feed: fills the hero card and adds Google Jobs schema. */
   window.GR_RECRUIT = /(recruit|sourcer|sourcing specialist|talent acquisition|talent partner|human resources|\\bhr\\b|hrbp|people (ops|operations|partner)|onboarding (specialist|coordinator))/i;
-  </script>'''
+  </script>
+  <script src="js/bench.js" defer></script>'''
 
-HOME = '''
-<!-- ── Hero ─────────────────────────────────── -->
+GUIDE = '''
 <!-- ── Salary guide banner ────────────────────── -->
 <a class="guide-band" href="https://100xworkforce.com/salary-guide/recruiters" target="_blank" rel="noopener">
   <div class="container guide-band-inner">
-    <img class="guide-band-cover" src="https://100xworkforce.com/static/marketing/guides/100x-workforce-recruiters-cover.png" alt="" width="46" height="60">
+    <span class="guide-band-cover" aria-hidden="true">2026<small>Salary Guide</small></span>
     <div class="guide-band-text">
       <strong>New: the 2026 Recruiter Salary Guide</strong>
       <span>What recruiters are asking to be paid, from 737 recruiters who applied with us. Typical ask: $81K.</span>
@@ -443,88 +437,166 @@ HOME = '''
     <span class="guide-band-go">Get the Free Guide &rarr;</span>
   </div>
 </a>
+'''
 
+HOME = '''
+<!-- ── Hero: glass panel beside the Fab Five, then the search ── -->
 <section class="hero">
-  <div class="container hero-grid">
-    <div class="hero-inner">
-      <span class="hero-kicker">Recruiters On Demand · A Division of NorthPoint</span>
-      <h1>Recruiters Who Know<br><em>Your Industry</em></h1>
-      <p class="hero-lede">Rent a dedicated virtual recruiter — or hire recruiters for your own team. Data centers, the trades, healthcare, public accounting, financial services, and everywhere else you're hiring.</p>
-      <p class="hero-service-line">Virtual Recruiters &nbsp;·&nbsp; Temp &nbsp;·&nbsp; Temp-to-Perm &nbsp;·&nbsp; Direct Hire</p>
-
-      <form class="hero-search-form" action="https://host.pcrecruiter.net/pcrbin/jobboard.aspx" method="get" target="_blank">
-        <input type="hidden" name="uid" value="Staff Financial.npsg">
-        <div class="hero-search-bar">
-          <input type="text" name="keyword" placeholder="Keyword — e.g. Recruiter, Sourcer…" aria-label="Keyword">
-          <select name="specialty" aria-label="Specialty">
-            <option value="">Select Specialty</option>
-            <option value="Recruiter">Recruiter</option>
-            <option value="Technical Recruiter">Technical Recruiter</option>
-            <option value="Healthcare Recruiter">Healthcare Recruiter</option>
-            <option value="Sourcer">Sourcer</option>
-            <option value="Recruiting Coordinator">Recruiting Coordinator</option>
-            <option value="Talent Acquisition">Talent Acquisition Manager</option>
-            <option value="HR">HR Generalist / HRBP</option>
-          </select>
-          <button type="submit">[[ico:search]] Search Jobs</button>
+  <div class="container">
+    <div class="hero-row">
+      <div class="hero-panel">
+        <p class="hero-eyebrow">Recruiter staffing · US &amp; International</p>
+        <h1>Recruiters for Anything</h1>
+        <p class="hero-sub"><strong>Get the recruiters you need. Fast.</strong> We place contract, temp and direct-hire recruiters for companies across the US and around the world. Tell us the role. We send your Fab Five™.</p>
+        <div class="hero-actions">
+          <a href="request-talent.html" class="btn btn-primary">Hire a Recruiter</a>
+          <a href="#why" class="btn btn-brown">Why GetRecruiters?</a>
         </div>
-      </form>
-      <div class="hero-search-sub">
-        <a href="virtual-recruiters.html" class="btn-hero-pill btn-hero-pill--filled">Get a Virtual Recruiter →</a>
-        <a href="hire-recruiters.html" class="btn-hero-pill">Hire a Recruiter →</a>
-        <a href="tel:+14042500790" class="btn-hero-pill">[[ico:phone]] 404-250-0790</a>
       </div>
+      <aside class="fab" id="fab" aria-label="Your Fab Five shortlist">
+        <h2>Your Fab Five™</h2>
+        <p class="fab-sub" id="fab-sub"></p>
+        <ol id="fab-list"></ol>
+        <a class="fab-more" id="fab-more" href="#bench">Search the full bench</a>
+      </aside>
     </div>
-    <aside class="hero-card" aria-label="Recruiting roles we're filling now">
-      <div class="hero-card-head">
-        <div>
-          <span class="hero-card-kicker">Now Placing</span>
-          <h2>Recruiting &amp; HR roles we're filling now</h2>
-        </div>
-        <span class="live-pill">Hiring now</span>
+    <div class="search-card" id="hire">
+      <div class="search-tabs" role="tablist" aria-label="Search">
+        <button class="search-tab" type="button" role="tab" id="tab-hire" data-tab="hire" aria-selected="true" aria-controls="panel-hire">I’m hiring recruiters</button>
+        <button class="search-tab" type="button" role="tab" id="tab-recruiter" data-tab="recruiter" aria-selected="false" aria-controls="panel-recruiter" tabindex="-1">I’m a recruiter</button>
       </div>
-      <div id="heroJobs"><div class="np-empty">Loading positions…</div></div>
-      <a class="hero-card-go" href="request-talent.html">Need a Recruiter? Tell Us &rarr;</a>
-      <p class="hero-card-fine">Live from our job board. <a href="{{JOB_BOARD}}" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600;">See every opening ↗</a></p>
-    </aside>
+      <form id="panel-hire" role="tabpanel" aria-labelledby="tab-hire">
+        <div class="search-fields">
+          <div class="search-field">
+            <label for="hire-type">Recruiter type</label>
+            <select id="hire-type">
+              <option value="full">Full-cycle recruiter</option>
+              <option value="support">Sourcer or coordinator</option>
+              <option value="ta">TA leader</option>
+              <option value="hr">HR professional</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label for="hire-engagement">Engagement</label>
+            <select id="hire-engagement">
+              <option>Contract</option>
+              <option>Temp</option>
+              <option>Contract-to-hire</option>
+              <option>Direct hire</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label for="hire-mode">Work style</label>
+            <select id="hire-mode">
+              <option>Remote</option>
+              <option>Hybrid</option>
+              <option>Onsite</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Get my Fab Five™</button>
+      </form>
+      <form id="panel-recruiter" role="tabpanel" aria-labelledby="tab-recruiter" action="https://host.pcrecruiter.net/pcrbin/jobboard.aspx" method="get" target="_blank" hidden>
+        <input type="hidden" name="uid" value="Staff Financial.npsg">
+        <div class="search-fields">
+          <div class="search-field">
+            <label for="rec-keyword">Keyword</label>
+            <input id="rec-keyword" type="text" name="keyword" placeholder="e.g. Recruiter, Sourcer">
+          </div>
+          <div class="search-field">
+            <label for="rec-specialty">Your specialty</label>
+            <select id="rec-specialty" name="specialty">
+              <option value="">Any specialty</option>
+              <option value="Recruiter">Recruiter</option>
+              <option value="Technical Recruiter">Technical Recruiter</option>
+              <option value="Healthcare Recruiter">Healthcare Recruiter</option>
+              <option value="Sourcer">Sourcer</option>
+              <option value="Recruiting Coordinator">Recruiting Coordinator</option>
+              <option value="Talent Acquisition">Talent Acquisition Manager</option>
+              <option value="HR">HR Generalist / HRBP</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">Find recruiter jobs</button>
+      </form>
+    </div>
+    <ul class="lines">
+      <li><a href="virtual-recruiters.html">virtual recruiters</a></li>
+      <li><a href="hire-recruiters.html#temp">contract</a></li>
+      <li><a href="hire-recruiters.html#temp">temp</a></li>
+      <li><a href="hire-recruiters.html#direct">direct hire</a></li>
+      <li><a href="virtual-recruiters.html#rpo">project rpo</a></li>
+      <li><a href="#payrolling">payrolling</a></li>
+      <li><a href="#hr-staffing">hr staffing</a></li>
+    </ul>
   </div>
 </section>
-<script>
-(function(){
-  var box=document.getElementById('heroJobs');
-  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-  function none(){box.innerHTML='<div class="np-empty">New recruiter searches open every week. <a href="request-talent.html">Tell us what you need →</a></div>';}
-  fetch('https://100xrecruiting.com/api/public/jobs?limit=50').then(function(r){return r.json();}).then(function(d){
-    var seen={}, jobs=((d&&d.jobs)||[]).filter(function(j){
-      var t=(j.title||'').trim(); if(!window.GR_RECRUIT.test(t)||seen[t.toLowerCase()]) return false; seen[t.toLowerCase()]=1; return true;
-    }).slice(0,5);
-    if(!jobs.length){none();return;}
-    box.innerHTML=jobs.map(function(j){
-      var meta=[j.location,j.salary].filter(Boolean).join(' · ');
-      var url=/^https:\\/\\//.test(j.job_url||'')?j.job_url:'{{JOB_BOARD}}';
-      return '<a class="np-job" href="'+esc(url)+'" target="_blank" rel="noopener"><span class="np-job-dot"></span><span>'
-        +'<span class="np-job-title">'+esc(j.title)+'</span>'+(meta?'<span class="np-job-meta">'+esc(meta)+'</span>':'')+'</span></a>';
-    }).join('');
-    var el=document.createElement('script'); el.type='application/ld+json';
-    el.text=JSON.stringify({"@context":"https://schema.org","@graph":jobs.map(function(j){
-      var loc=(j.location||'Atlanta, GA').split(',');
-      return {"@type":"JobPosting","title":j.title,
-        "datePosted":j.date_posted||new Date().toISOString().slice(0,10),
-        "validThrough":new Date(Date.now()+60*24*60*60*1000).toISOString().slice(0,10),
-        "employmentType":"FULL_TIME",
-        "hiringOrganization":{"@type":"Organization","name":"GetRecruiters Group","sameAs":"{{SITE}}","logo":"{{SITE}}/img/getrecruiters-logo.png"},
-        "jobLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressLocality":(loc[0]||'Atlanta').trim(),"addressRegion":(loc[1]||'GA').trim(),"addressCountry":"US"}},
-        "description":"Recruiting role placed by GetRecruiters Group, a division of NorthPoint Search Group. Contact us to learn more.",
-        "url":/^https:\\/\\//.test(j.job_url||'')?j.job_url:'{{JOB_BOARD}}'};
-    })});
-    document.head.appendChild(el);
-  }).catch(none);
-})();
-</script>
 
-<!-- The 100X spotlight strip is off here: only 2 recruiting profiles matched it, so it repeated them.
-     The blinded cards below (questionnaire + Recruiter Application) are the spotlight now. -->
-''' + PROFILES + '''
+<!-- ── Recruiter bench search ─────────────────── -->
+<section class="section section-alt" id="bench">
+  <div class="container">
+    <span class="section-kicker">Recruiters Available Now</span>
+    <h2 class="section-title">See Who's <em>On the Bench</em></h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Screened recruiters and talent pros who completed our candidate questionnaire or recruiter application. Names are hidden to protect confidentiality — ask about anyone and we'll make the introduction.</p>
+    <div class="bench-tracks" id="bench-tracks"></div>
+    <form class="bench-filters" id="bench-filters" role="search" aria-label="Filter the recruiter bench">
+      <input class="bench-wide" id="bench-q" type="search" placeholder="Search specialty, tools, location…" aria-label="Search the bench">
+      <select id="bench-exp" aria-label="Experience">
+        <option value="">Any experience</option>
+        <option value="0-4">Under 5 yrs</option>
+        <option value="5-9">5–9 yrs</option>
+        <option value="10-14">10–14 yrs</option>
+        <option value="15-99">15+ yrs</option>
+      </select>
+      <select id="bench-spec" aria-label="Specialty">
+        <option value="">Any specialty</option>
+      </select>
+      <select id="bench-tool" aria-label="ATS or tool">
+        <option value="">Any ATS or tool</option>
+      </select>
+      <select id="bench-mode" aria-label="Work style">
+        <option value="">Any work style</option>
+        <option>Remote</option>
+        <option>Hybrid</option>
+        <option>Onsite</option>
+      </select>
+      <select id="bench-bg" aria-label="Background">
+        <option value="">Any background</option>
+        <option>Agency</option>
+        <option>In-house</option>
+      </select>
+      <select id="bench-sort" aria-label="Sort">
+        <option value="most">Most experience</option>
+        <option value="least">Least experience</option>
+      </select>
+      <div class="bench-status">
+        <span id="bench-count" role="status"></span>
+        <button class="bench-clear" id="bench-clear" type="button">Clear filters</button>
+      </div>
+    </form>
+    <div class="bench-table-wrap">
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th scope="col">Recruiter</th>
+            <th scope="col" class="bench-yrs">Yrs</th>
+            <th scope="col">Specialties</th>
+            <th scope="col">Tools</th>
+            <th scope="col">Work style</th>
+            <th scope="col"><span class="sr-only">Unlock</span></th>
+          </tr>
+        </thead>
+        <tbody id="bench-rows"></tbody>
+      </table>
+    </div>
+    <div class="bench-more" id="bench-more-row">
+      <button class="btn btn-outline-dark" id="bench-more" type="button">Show more</button>
+    </div>
+  </div>
+</section>
+<script id="bench-data" type="application/json">''' + bench_json() + '''</script>
+
 <!-- ── Stats strip ───────────────────────────── -->
 <div class="hero-stats">
   <div class="container">
@@ -538,52 +610,44 @@ HOME = '''
   </div>
 </div>
 
-<!-- ── Service photo cards ───────────────────── -->
-<section class="section" style="padding-top:0;">
+<!-- ── Services ──────────────────────────────── -->
+<section class="section" id="services" style="padding-top:0;">
   <div class="container">
-    <div class="service-cards four">
+    <span class="section-kicker">How We Staff</span>
+    <h2 class="section-title">Recruiters on Your Terms</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Add one recruiter for a hiring surge or build a whole team. Every engagement starts with a curated shortlist, not a stack of resumes.</p>
+    <ul class="services">
+      <li class="services-lead"><h3><a href="virtual-recruiters.html">Virtual Recruiters</a></h3><p>A dedicated recruiter who works your openings as part of your team — without adding headcount.</p></li>
+      <li><h3><a href="hire-recruiters.html#temp">Contract</a></h3><p>Experienced recruiters for projects, surges and backfills. Billed hourly, scaled up or down as you need.</p></li>
+      <li><h3><a href="hire-recruiters.html#temp">Temp</a></h3><p>Short-term coverage for leave, events or seasonal hiring. Coordinators and sourcers ready to start quickly.</p></li>
+      <li><h3><a href="hire-recruiters.html#direct">Direct Hire</a></h3><p>Permanent recruiters, TA partners and recruiting leaders, placed on contingency or retained search.</p></li>
+      <li><h3><a href="virtual-recruiters.html#rpo">Project RPO</a></h3><p>Big hiring push on a deadline? Our recruiters run the project from sourcing to offer, then hand it back when the roles are filled.</p></li>
+      <li><h3><a href="request-talent.html">International</a></h3><p>Offshore and nearshore recruiters and sourcers who work your hours, at a fraction of the cost.</p></li>
+      <li><h3><a href="#payrolling">Payrolling</a></h3><p>Found someone yourself? We put them on payroll and handle pay, taxes, insurance and compliance.</p></li>
+    </ul>
+  </div>
+</section>
 
-      <a class="svc-card" href="virtual-recruiters.html">
-        <div class="svc-card-bg" style="background-image:url('{{UNS}}photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80');background-position:center top;"></div>
-        <div class="svc-card-overlay"></div>
-        <div class="svc-card-body">
-          <h3>Virtual Recruiters</h3>
-          <p>A dedicated recruiter who works your openings as part of your team — without adding headcount.</p>
-          <span class="svc-card-link">Learn More →</span>
-        </div>
-      </a>
-
-      <a class="svc-card" href="hire-recruiters.html#temp">
-        <div class="svc-card-bg" style="background-image:url('{{UNS}}photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80');"></div>
-        <div class="svc-card-overlay"></div>
-        <div class="svc-card-body">
-          <h3>Temp Recruiters</h3>
-          <p>Extra recruiting hands for hiring surges, new sites, and big projects — on our payroll.</p>
-          <span class="svc-card-link">Learn More →</span>
-        </div>
-      </a>
-
-      <a class="svc-card" href="hire-recruiters.html#direct">
-        <div class="svc-card-bg" style="background-image:url('{{UNS}}photo-1568992687947-868a62a9f521?auto=format&fit=crop&w=800&q=80');"></div>
-        <div class="svc-card-overlay"></div>
-        <div class="svc-card-body">
-          <h3>Direct Hire Recruiters</h3>
-          <p>Recruiters, sourcers, and talent leaders placed on your team for the long term.</p>
-          <span class="svc-card-link">Learn More →</span>
-        </div>
-      </a>
-
-      <a class="svc-card" href="virtual-recruiters.html#rpo">
-        <div class="svc-card-bg" style="background-image:url('{{UNS}}photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80');"></div>
-        <div class="svc-card-overlay"></div>
-        <div class="svc-card-body">
-          <h3>RPO &amp; Project Recruiting</h3>
-          <p>A whole recruiting team for a new data center, plant, or location — scaled up or down as you need.</p>
-          <span class="svc-card-link">Learn More →</span>
-        </div>
-      </a>
-
+<!-- ── AI recruiting agents ──────────────────── -->
+<section class="section section-dark" id="ai-agents">
+  <div class="container split">
+    <div class="ai-copy">
+      <p class="ai-badge">100X AI Recruiting Agents · Free trial</p>
+      <h2 class="section-title">Make More Internal Placements with AI</h2>
+      <p>Give your in-house recruiting team our AI recruiting agents. They source, screen and reach out around the clock, so your team fills more roles internally and leans less on outside agencies.</p>
+      <p class="ai-note">Works for your own recruiters and for every recruiter we place.</p>
+      <div class="ai-actions">
+        <a href="https://100xrecruiting.com" target="_blank" rel="noopener" class="btn btn-white btn-lg">Start Your Free Trial ↗</a>
+        <a href="contact.html" class="btn btn-outline-white btn-lg">See a Demo</a>
+      </div>
     </div>
+    <ul class="agents">
+      <li><h3>Sourcing agent</h3><p>Builds a Fab Five™ shortlist for every open job.</p></li>
+      <li><h3>Outreach agent</h3><p>Writes and sends personalized emails and texts.</p></li>
+      <li><h3>Screening agent</h3><p>Scores candidates against the role and flags the best fits.</p></li>
+      <li><h3>Marketing agent</h3><p>Markets top candidates to hiring managers who need them.</p></li>
+    </ul>
   </div>
 </section>
 
@@ -688,9 +752,111 @@ HOME = '''
     </div>
   </div>
 </section>
+<div id="payrolling"></div>
 ''' + EOR + '''
+<!-- ── For recruiters ────────────────────────── -->
+<section class="section desk" id="recruiter-jobs">
+  <div class="container split">
+    <div class="desk-copy">
+      <span class="section-kicker">For Recruiters</span>
+      <h2 class="section-title">Your Next Desk Is Waiting</h2>
+      <p>Contract, temp and full-time recruiting roles in the US and abroad. Build one profile and we market you to the companies that need your specialty.</p>
+      <ul class="desk-list">
+        <li><strong>Target.</strong> Pick your specialty, pay and work style.</li>
+        <li><strong>Connect.</strong> We introduce you to hiring managers.</li>
+        <li><strong>Get Hired.</strong> Start fast on contract or go full-time.</li>
+      </ul>
+      <div class="desk-actions">
+        <a href="contact.html" class="btn btn-white btn-lg">Join the Recruiter Bench</a>
+        <a href="{{JOB_BOARD}}" target="_blank" rel="noopener" class="btn btn-outline-ink btn-lg">Browse Recruiter Jobs ↗</a>
+      </div>
+    </div>
+    <aside class="hero-card" aria-label="Recruiting roles we're filling now">
+      <div class="hero-card-head">
+        <div>
+          <span class="hero-card-kicker">Now Placing</span>
+          <h2>Recruiting &amp; HR roles we're filling now</h2>
+        </div>
+        <span class="live-pill">Hiring now</span>
+      </div>
+      <div id="heroJobs"><div class="np-empty">Loading positions…</div></div>
+      <a class="hero-card-go" href="request-talent.html">Need a Recruiter? Tell Us &rarr;</a>
+      <p class="hero-card-fine">Live from our job board. <a href="{{JOB_BOARD}}" target="_blank" rel="noopener" style="color:var(--brand-text);font-weight:600;">See every opening ↗</a></p>
+    </aside>
+  </div>
+</section>
+<script>
+(function(){
+  var box=document.getElementById('heroJobs');
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function none(){box.innerHTML='<div class="np-empty">New recruiter searches open every week. <a href="request-talent.html">Tell us what you need →</a></div>';}
+  fetch('https://100xrecruiting.com/api/public/jobs?limit=50').then(function(r){return r.json();}).then(function(d){
+    var seen={}, jobs=((d&&d.jobs)||[]).filter(function(j){
+      var t=(j.title||'').trim(); if(!window.GR_RECRUIT.test(t)||seen[t.toLowerCase()]) return false; seen[t.toLowerCase()]=1; return true;
+    }).slice(0,5);
+    if(!jobs.length){none();return;}
+    box.innerHTML=jobs.map(function(j){
+      var meta=[j.location,j.salary].filter(Boolean).join(' · ');
+      var url=/^https:\\/\\//.test(j.job_url||'')?j.job_url:'{{JOB_BOARD}}';
+      return '<a class="np-job" href="'+esc(url)+'" target="_blank" rel="noopener"><span class="np-job-dot"></span><span>'
+        +'<span class="np-job-title">'+esc(j.title)+'</span>'+(meta?'<span class="np-job-meta">'+esc(meta)+'</span>':'')+'</span></a>';
+    }).join('');
+    var el=document.createElement('script'); el.type='application/ld+json';
+    el.text=JSON.stringify({"@context":"https://schema.org","@graph":jobs.map(function(j){
+      var loc=(j.location||'Atlanta, GA').split(',');
+      return {"@type":"JobPosting","title":j.title,
+        "datePosted":j.date_posted||new Date().toISOString().slice(0,10),
+        "validThrough":new Date(Date.now()+60*24*60*60*1000).toISOString().slice(0,10),
+        "employmentType":"FULL_TIME",
+        "hiringOrganization":{"@type":"Organization","name":"GetRecruiters Group","sameAs":"{{SITE}}","logo":"{{SITE}}/img/getrecruiters-logo.png"},
+        "jobLocation":{"@type":"Place","address":{"@type":"PostalAddress","addressLocality":(loc[0]||'Atlanta').trim(),"addressRegion":(loc[1]||'GA').trim(),"addressCountry":"US"}},
+        "description":"Recruiting role placed by GetRecruiters Group, a division of NorthPoint Search Group. Contact us to learn more.",
+        "url":/^https:\\/\\//.test(j.job_url||'')?j.job_url:'{{JOB_BOARD}}'};
+    })});
+    document.head.appendChild(el);
+  }).catch(none);
+})();
+</script>
+
+<!-- ── Why GetRecruiters ─────────────────────── -->
+<section class="section" id="why">
+  <div class="container">
+    <h2 class="section-title">Why GetRecruiters</h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Run by recruiters, powered by 100X workforce intelligence.</p>
+    <ul class="why-list">
+      <li><h3>Recruiters placing recruiters</h3><p>We have sat in your seat. We vet for desk skills, tools and real placement history.</p></li>
+      <li><h3>A bench that’s always warm</h3><p>Recruiters ready now, so you never start a search from zero.</p></li>
+      <li><h3>One partner, every model</h3><p>Temp, contract, contract-to-hire, direct hire, payrolling and project RPO under one agreement.</p></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── HR staffing ───────────────────────────── -->
+<section class="section section-alt" id="hr-staffing">
+  <div class="container two-col">
+    <div>
+      <span class="section-kicker">HR Staffing</span>
+      <h2 class="section-title">We Place HR Talent Too</h2>
+      <div class="section-divider"></div>
+      <p class="section-sub" style="margin-bottom:24px;">The same bench, the same Fab Five™ process, for your HR team. Temp, contract and direct hire, US and international.</p>
+      <a href="request-talent.html" class="btn btn-primary">Hire HR Talent →</a>
+    </div>
+    <div class="specialty-grid">
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>HR Generalists</a>
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>HR Business Partners</a>
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>HR Managers &amp; Directors</a>
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>Benefits &amp; Compensation</a>
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>Payroll</a>
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>HRIS Analysts</a>
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>Employee Relations</a>
+      <a class="specialty-item" href="request-talent.html"><span class="specialty-dot"></span>Onboarding Specialists</a>
+    </div>
+  </div>
+</section>
+
 <!-- ── FAQ ────────────────────────────────────── -->
-<section class="section section-alt" aria-label="Frequently asked questions">
+<section class="section" aria-label="Frequently asked questions">
   <div class="container">
     <div class="centered">
       <span class="section-kicker">Common Questions</span>
@@ -701,7 +867,7 @@ HOME = '''
     </div>
   </div>
 </section>
-''' + cta()
+''' + cta("Need a Recruiter This Week?<br>Get Your Fab Five™.")
 
 
 # ───────────────────────────── Virtual recruiters ─────────────────────────────
@@ -1050,7 +1216,7 @@ REQUEST = '''
 <!-- ── Opt-in Hero ────────────────────────────── -->
 <section class="optin-hero" style="background-image:url('{{UNS}}photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80');">
   <div class="container">
-    <div class="hero-badge" style="color:rgba(255,255,255,.85);">For Hiring Managers &amp; HR Leaders</div>
+    <div class="hero-badge">For Hiring Managers &amp; HR Leaders</div>
     <h1>Get a <em>Recruiter</em><br>Working for You</h1>
     <p>Tell us what you're hiring for. We'll match you with a virtual recruiter — or start the search for a recruiter to join your team.</p>
   </div>
@@ -1171,7 +1337,7 @@ CONTACT = page_hero("Contact", "Get in Touch",
           <div class="contact-item"><div class="contact-icon">[[ico:phone]]</div><div><div class="contact-label">Phone</div><a href="tel:+14042500790">404-250-0790</a><br><a href="tel:+16787775627">678-777-5627</a></div></div>
           <div class="contact-item"><div class="contact-icon">[[ico:mail]]</div><div><div class="contact-label">Email</div><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></div></div>
           <div class="contact-item"><div class="contact-icon">[[ico:pin]]</div><div><div class="contact-label">Location</div><strong>Atlanta, GA</strong><div class="contact-sub">Serving clients nationwide</div></div></div>
-          <div class="contact-item"><div class="contact-icon">[[ico:briefcase]]</div><div><div class="contact-label">Job Board</div><a href="{{JOB_BOARD}}" target="_blank" rel="noopener" style="color:var(--blue);">View Open Positions ↗</a></div></div>
+          <div class="contact-item"><div class="contact-icon">[[ico:briefcase]]</div><div><div class="contact-label">Job Board</div><a href="{{JOB_BOARD}}" target="_blank" rel="noopener" style="color:var(--brand-text);">View Open Positions ↗</a></div></div>
         </div>
         <div class="note-card">
           <h4>Are you a recruiter looking for your next role?</h4>
@@ -1344,6 +1510,7 @@ PAGES = [
 
 if __name__ == "__main__":
     for file, title, desc, body, schema, extra in PAGES:
-        html = head(file, title, desc, schema, extra) + NAV + body + FOOTER
+        top = GUIDE if file == "index.html" else ""
+        html = head(file, title, desc, schema, extra) + top + NAV + body + FOOTER
         (OUT / file).write_text(fill(html), encoding="utf-8")
         print("wrote", file)
