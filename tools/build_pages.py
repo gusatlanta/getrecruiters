@@ -270,11 +270,11 @@ EOR = '''
     <div class="eor-grid">
       <div>
         <span class="section-kicker">Payrolling · Employer of Record</span>
-        <h2 class="section-title" style="color:var(--white);">Your Recruiter.<br>Our Payroll.</h2>
-        <p style="color:rgba(255,255,255,.75);line-height:1.75;margin-bottom:28px;">GetRecruiters — powered by NorthPoint — acts as the Employer of Record for every temp recruiter. One simple bill rate. Zero HR overhead on your end.</p>
+        <h2 class="section-title">Your Recruiter.<br>Our Payroll.</h2>
+        <p style="color:var(--text-muted);line-height:1.75;margin-bottom:28px;">GetRecruiters — powered by NorthPoint — acts as the Employer of Record for every temp recruiter. One simple bill rate. Zero HR overhead on your end.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="hire-recruiters.html" class="btn btn-white btn-lg">Hire Recruiters</a>
-          <a href="request-talent.html" class="btn btn-outline-white btn-lg">Get a Recruiter</a>
+          <a href="hire-recruiters.html" class="btn btn-primary btn-lg">Hire Recruiters</a>
+          <a href="request-talent.html" class="btn btn-outline-dark btn-lg">Get a Recruiter</a>
         </div>
       </div>
       <div class="eor-features">
@@ -448,8 +448,8 @@ HOME = '''
     <div class="hero-row">
       <div class="hero-panel">
         <p class="hero-eyebrow">Recruiter staffing · A division of NorthPoint Search Group</p>
-        <h1>Recruiters for Anything</h1>
-        <p class="hero-sub"><strong>Get the recruiters you need. Fast.</strong> We place contract, temp and direct-hire recruiters for companies across the US and around the world. Tell us the role. We send your Fab Five™.</p>
+        <h1>Get Recruiters for Anything</h1>
+        <p class="hero-sub"><strong>The recruiters you need. Fast.</strong> We place contract, temp and direct-hire recruiters for companies across the US and around the world. Tell us the role. We send your Fab Five™.</p>
         <div class="hero-actions">
           <a href="request-talent.html" class="btn btn-primary">Hire a Recruiter</a>
           <a href="#why" class="btn btn-white">Why GetRecruiters?</a>
@@ -963,7 +963,7 @@ VIRTUAL = page_hero("Virtual Recruiters", "Dedicated <em>Virtual Recruiters</em>
         </ul>
         <div class="fee">
           <div class="fee-label">We Help You the Entire Time</div>
-          <div class="fee-text"><strong style="color:var(--white);">And you only pay when we're successful.</strong> Live office hours for any questions — plus membership in our <a href="https://www.skool.com/100xrecruiting" target="_blank" rel="noopener">100X Recruiting community on Skool</a>. Our AI recruiting assistant comes with a 100% satisfaction guarantee.</div>
+          <div class="fee-text"><strong style="color:var(--ink);">And you only pay when we're successful.</strong> Live office hours for any questions — plus membership in our <a href="https://www.skool.com/100xrecruiting" target="_blank" rel="noopener">100X Recruiting community on Skool</a>. Our AI recruiting assistant comes with a 100% satisfaction guarantee.</div>
         </div>
       </div>
     </div>
