@@ -210,7 +210,8 @@ def head(file, title, desc, extra_schema=None, extra_head=""):
 def page_hero(crumb, h1, sub, photo, pos="center"):
     return f'''
 <!-- ── Page Hero ──────────────────────────────── -->
-<section class="page-hero" style="background-image:url('{UNS}{photo}?auto=format&fit=crop&w=1600&q=80');background-position:{pos};">
+<section class="page-hero">
+  <div class="page-hero-photo" style="background-image:url('{UNS}{photo}?auto=format&fit=crop&w=1000&q=80');background-position:{pos};"></div>
   <div class="container">
     <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>{crumb}</div>
     <h1>{h1}</h1>
@@ -451,7 +452,7 @@ HOME = '''
         <p class="hero-sub"><strong>Get the recruiters you need. Fast.</strong> We place contract, temp and direct-hire recruiters for companies across the US and around the world. Tell us the role. We send your Fab Five™.</p>
         <div class="hero-actions">
           <a href="request-talent.html" class="btn btn-primary">Hire a Recruiter</a>
-          <a href="#why" class="btn btn-brown">Why GetRecruiters?</a>
+          <a href="#why" class="btn btn-white">Why GetRecruiters?</a>
         </div>
       </div>
       <aside class="fab" id="fab" aria-label="Your Fab Five shortlist">
@@ -1500,7 +1501,7 @@ AI = '''
         <p class="hero-sub"><strong>Tell Scout who you need in plain words.</strong> It finds people, scores every match and lines up the best ones, right in the AI app you already use.</p>
         <div class="hero-actions">
           <a href="https://100xrecruiting.com" target="_blank" rel="noopener" class="btn btn-primary">Start Your Free Trial ↗</a>
-          <a href="#talk" class="btn btn-brown">See a Demo</a>
+          <a href="#talk" class="btn btn-white">See a Demo</a>
         </div>
         <p class="ai-fine">Unlimited job posts. Top 3 matches for every job. No download.</p>
       </div>
