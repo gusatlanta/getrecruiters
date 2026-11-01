@@ -1754,7 +1754,7 @@ PAGES = [
 
 if __name__ == "__main__":
     for file, title, desc, body, schema, extra in PAGES:
-        top = GUIDE if file == "index.html" else ""
+        top = GUIDE if file in ("index.html", "ai-recruiting.html") else ""
         html = head(file, title, desc, schema, extra) + top + NAV + body + FOOTER
         (OUT / file).write_text(fill(html), encoding="utf-8")
         print("wrote", file)
