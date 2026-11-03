@@ -1,9 +1,14 @@
 """Build the GetRecruiters edition of the 2026 Recruiter Salary Guide.
 
-The numbers come from the guide the 100X site already publishes, so both always match. This swaps the
+This edition counts 2026 only (Gus 11-02: "we want 2026"), so it no longer matches the 100X guide, which
+starts in January 2024. Build its source page into a scratch folder from a copy of validated_contacts.db,
+so the 100X guide and its saved totals stay as they are, then run this script on that page. It swaps the
 look and the name: a light cover, the GetRecruiters orange, and GetRecruiters as the only brand.
 
-    python tools/make_salary_guide.py <100x-workforce-salary-guide-recruiters.html> [cover-html-path]
+    python <hundredx>/dev/make_guide_more.py --db <copy> --data <scratch> --out <scratch> --since 2026-01-01 --force --no-pdf recruiters
+    python tools/make_salary_guide.py <scratch>/static/marketing/guides/100x-workforce-salary-guide-recruiters.html [cover-html-path]
+
+--force is needed because only 2 title groups reach 5 people in 2026.
 
 Writes downloads/getrecruiters-salary-guide-recruiters.html. Chrome then prints that page to
 downloads/GetRecruiters-Salary-Guide-2026-Recruiters.pdf, and shoots the cover page (the second path)
@@ -68,6 +73,13 @@ CTA = """<section class="cta">
   <a class="go" href="https://www.getrecruiters.com/request-talent.html" target="_blank" rel="noopener">Tell us who you need &rarr; getrecruiters.com</a>
 </section>"""
 
+TENURE = """<section>
+  <span class="eyebrow">Tenure</span>
+  <h2>How long people stay</h2>
+  <p>Median years with their current employer, January 2026 (BLS).</p>
+  {table}
+</section>"""
+
 
 def swap(html, pattern, new, label):
     out, n = re.subn(pattern, lambda _: new, html, flags=re.S)
@@ -91,10 +103,28 @@ def main():
                 "This guide counts everyone", "other guide note")
     html = swap(html, r'<p class="small muted">100X Workforce[^<]*</p>',
                 '<p class="small muted">GetRecruiters Group, a division of NorthPoint Search Group · getrecruiters.com · © 2026</p>', "footer")
+    html = swap(html, r"who applied with us since January 2026", "who applied with us in 2026", "cover line")
+    # With no billing or commission answers in 2026, the fourth tile repeats the first one.
+    people = re.search(r"from ([\d,]+) recruiters who applied", html).group(1)
+    html = swap(html, r'<div class="tile"><b>[^<]*</b><span>Typical ask, [^<]*</span><small>[^<]*</small></div>',
+                f'<div class="tile"><b>{people}</b><span>Recruiters behind this guide</span><small>one form per person</small></div>',
+                "repeat tile")
+    # The BLS pay and turnover tables are dated 2025. Tenure is dated January 2026, so it stays.
+    tenure = re.search(r'<h3>How long people stay</h3>.*?(<div class="tablewrap">.*?</table></div>)', html, flags=re.S)
+    if not tenure:
+        sys.exit("nothing matched for tenure: the source guide changed")
+    html = swap(html, r'<section class="page">\s*<span class="eyebrow">For comparison</span>.*?</section>\s*', "", "BLS pay")
+    html = swap(html, r'<section>\s*<span class="eyebrow">Turnover</span>.*?</section>', TENURE.format(table=tenure.group(1)), "turnover")
+    html = swap(html, r"\s*<li>BLS Occupational Employment[^\n]*</li>", "", "BLS pay source")
+    html = swap(html, r"\s*<li>BLS Job Openings[^\n]*</li>", "", "turnover source")
 
     left = re.findall(r"100x|claude\.ai|zipapply", html, flags=re.I)
     if left:
         sys.exit(f"another brand is still in the guide: {sorted(set(left))}")
+    words = re.sub(r"<style.*?</style>|<[^>]+>", " ", html, flags=re.S)
+    old = re.findall(r"\b20(?:2[0-5]|[01]\d)\b", words)
+    if old:
+        sys.exit(f"an older year is still in the guide: {sorted(set(old))}")
 
     OUT.parent.mkdir(exist_ok=True)
     OUT.write_text(html, encoding="utf-8")
